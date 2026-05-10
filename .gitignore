@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime data (config, logs, inspection output)
+data/config.json
+data/*.log
+data/network-inspection.json
+data/raw/*.har
+
+# TLS cert (self-signed, generated on first run)
+cert.pem
+key.pem
+
+# Editor
+.vscode/
+
+# Claude Code local settings
+.claude/

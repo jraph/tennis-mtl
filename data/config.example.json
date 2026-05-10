@@ -1,0 +1,15 @@
+{
+  "date": "2026-01-01",
+  "time": "17:00",
+  "time_window_hours": 2,
+  "scan_window_hours": 48,
+  "check_days": 1,
+  "check_times": ["17:00"],
+  "auto_check_time": "00:00",
+  "check_interval_seconds": 3600,
+  "check_duration_minutes": 1440,
+  "borough_ids": ["7", "15", "5"],
+  "facility_type_ids": ["175", "114"],
+  "sort_column": "facility.name",
+  "open_when_found": false
+}

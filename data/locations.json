@@ -1,0 +1,503 @@
+{
+  "source": "data/raw/loisirs.montreal.ca.har",
+  "boroughs": [
+    {
+      "id": "3",
+      "name": "Ahuntsic - Cartierville"
+    },
+    {
+      "id": "9",
+      "name": "Côte-des-Neiges - Notre-Dame-de-Grâce"
+    },
+    {
+      "id": "16",
+      "name": "L'Île-Bizard - Sainte-Geneviève"
+    },
+    {
+      "id": "2",
+      "name": "Lachine"
+    },
+    {
+      "id": "19",
+      "name": "LaSalle"
+    },
+    {
+      "id": "7",
+      "name": "Le Plateau-Mont-Royal"
+    },
+    {
+      "id": "6",
+      "name": "Mercier - Hochelaga-Maisonneuve"
+    },
+    {
+      "id": "15",
+      "name": "Outremont"
+    },
+    {
+      "id": "11",
+      "name": "Rivière-des-Prairies - Pointe-aux-Trembles"
+    },
+    {
+      "id": "5",
+      "name": "Rosemont - La Petite-Patrie"
+    },
+    {
+      "id": "17",
+      "name": "Saint-Laurent"
+    },
+    {
+      "id": "14",
+      "name": "Saint-Léonard"
+    },
+    {
+      "id": "1",
+      "name": "Verdun"
+    },
+    {
+      "id": "8",
+      "name": "Ville-Marie"
+    },
+    {
+      "id": "4",
+      "name": "Villeray-Saint-Michel - Parc-Extension"
+    }
+  ],
+  "sites": [
+    {
+      "site_key": "academie-laurenhill-junior-campus",
+      "site_id": "694",
+      "site": "Académie LaurenHill Junior campus",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "arena-jacques-lemaire",
+      "site_id": "669",
+      "site": "Aréna Jacques-Lemaire",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "arena-saint-louis",
+      "site_id": "1707",
+      "site": "Aréna Saint-Louis",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "centre-de-tennis-cavelier",
+      "site_id": "882",
+      "site": "Centre de Tennis Cavelier",
+      "borough_id": "19",
+      "borough": "LaSalle"
+    },
+    {
+      "site_key": "centre-leonardo-da-vinci",
+      "site_id": "13",
+      "site": "Centre Léonardo-da-Vinci",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "centre-pierre-charbonneau",
+      "site_id": "1628",
+      "site": "Centre Pierre-Charbonneau",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "centre-sanaaq",
+      "site_id": "2120",
+      "site": "Centre Sanaaq",
+      "borough_id": "8",
+      "borough": "Ville-Marie"
+    },
+    {
+      "site_key": "centre-sportif-jean-rougeau",
+      "site_id": "1265",
+      "site": "Centre sportif Jean-Rougeau",
+      "borough_id": "4",
+      "borough": "Villeray-Saint-Michel - Parc-Extension"
+    },
+    {
+      "site_key": "complexe-communautaire-saint-leonard-t-sport",
+      "site_id": "85",
+      "site": "Complexe communautaire Saint-Léonard, t sport",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "complexe-sportif-claude-robillard",
+      "site_id": "813",
+      "site": "Complexe sportif Claude-Robillard",
+      "borough_id": "3",
+      "borough": "Ahuntsic - Cartierville"
+    },
+    {
+      "site_key": "complexe-sportif-marie-victorin",
+      "site_id": "848",
+      "site": "Complexe sportif Marie-Victorin",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "complexe-sportif-saint-laurent",
+      "site_id": "593",
+      "site": "Complexe sportif Saint-Laurent",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "le-taz",
+      "site_id": "956",
+      "site": "Le TAZ",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "parc-arthur-therrien-terrain-de-sport",
+      "site_id": "1070",
+      "site": "Parc Arthur-Therrien, terrain de sport",
+      "borough_id": "1",
+      "borough": "Verdun"
+    },
+    {
+      "site_key": "parc-beaubien-terrain-de-sport",
+      "site_id": "1520",
+      "site": "Parc Beaubien, terrain de sport",
+      "borough_id": "5",
+      "borough": "Rosemont - La Petite-Patrie",
+      "latitude": 45.5538121,
+      "longitude": -73.5889567,
+      "detail_url": "https://www.google.com/maps/place/Beaubien+Park+tennis+courts/@45.5538192,-73.5893958,123m/data=!3m1!1e3!4m12!1m5!3m4!2zNDXCsDMzJzEwLjgiTiA3M8KwMzUnMjYuOSJX!8m2!3d45.553!4d-73.5908!3m5!1s0x4cc91952750e1595:0xeedd151e62904af3!8m2!3d45.5538121!4d-73.5889567!16s%2Fg%2F11rz99xxwb?entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "site_key": "parc-coubertin-terrain-de-sport",
+      "site_id": "67",
+      "site": "Parc Coubertin, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-de-l-honorable-george-o-reilly",
+      "site_id": "1086",
+      "site": "Parc de L'Honorable-George-O'Reilly",
+      "borough_id": "1",
+      "borough": "Verdun"
+    },
+    {
+      "site_key": "parc-de-la-fontaine-ile-des-soeurs-terrain-sport",
+      "site_id": "1061",
+      "site": "Parc de la Fontaine, Île-des-Soeurs, Terrain sport",
+      "borough_id": "1",
+      "borough": "Verdun"
+    },
+    {
+      "site_key": "parc-de-la-reine-elisabeth-terrain-de-sport",
+      "site_id": "740",
+      "site": "Parc de la Reine-Élisabeth, terrain de sport",
+      "borough_id": "1",
+      "borough": "Verdun"
+    },
+    {
+      "site_key": "parc-de-mesy-terrain-de-sport",
+      "site_id": "798",
+      "site": "Parc de Mésy, terrain de sport",
+      "borough_id": "3",
+      "borough": "Ahuntsic - Cartierville"
+    },
+    {
+      "site_key": "parc-des-hirondelles-terrain-de-sport",
+      "site_id": "781",
+      "site": "Parc des Hirondelles, terrain de sport",
+      "borough_id": "3",
+      "borough": "Ahuntsic - Cartierville"
+    },
+    {
+      "site_key": "parc-des-erables-terrain-de-sport",
+      "site_id": "2144",
+      "site": "Parc des Érables, terrain de sport",
+      "borough_id": "16",
+      "borough": "L'Île-Bizard - Sainte-Geneviève"
+    },
+    {
+      "site_key": "parc-elgar-terrain-de-sport",
+      "site_id": "1068",
+      "site": "Parc Elgar, terrain de sport",
+      "borough_id": "1",
+      "borough": "Verdun"
+    },
+    {
+      "site_key": "parc-ferland-terrain-de-sport",
+      "site_id": "69",
+      "site": "Parc Ferland, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-giuseppe-garibaldi-terrain-de-sport",
+      "site_id": "70",
+      "site": "Parc Giuseppe-Garibaldi, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-hebert-terrain-de-sport",
+      "site_id": "71",
+      "site": "Parc Hébert, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-jean-duceppe-terrain-de-sport",
+      "site_id": "455",
+      "site": "Parc Jean-Duceppe, terrain de sport",
+      "borough_id": "5",
+      "borough": "Rosemont - La Petite-Patrie"
+    },
+    {
+      "site_key": "parc-jeanne-mance-terrains-sportifs",
+      "site_id": "1726",
+      "site": "Parc Jeanne-Mance, terrains sportifs",
+      "borough_id": "7",
+      "borough": "Le Plateau-Mont-Royal",
+      "latitude": 45.5177275,
+      "longitude": -73.5869283,
+      "detail_url": "https://www.google.com/maps/place/Jeanne-Mance+Park+-+Tennis+Court/@45.517435,-73.5875312,206m/data=!3m1!1e3!4m12!1m5!3m4!2zNDXCsDMwJzU4LjMiTiA3M8KwMzUnMDcuOCJX!8m2!3d45.5162!4d-73.5855!3m5!1s0x4cc91a2cce2c5eb9:0xe37f16079fd85f77!8m2!3d45.5177275!4d-73.5869283!16s%2Fg%2F119ty0k4n?entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "site_key": "parc-joseph-pare-terrain-de-sport",
+      "site_id": "1533",
+      "site": "Parc Joseph-Paré, terrain de sport",
+      "borough_id": "5",
+      "borough": "Rosemont - La Petite-Patrie"
+    },
+    {
+      "site_key": "parc-la-fontaine-terrains-sportifs",
+      "site_id": "1734",
+      "site": "Parc La Fontaine, terrains sportifs",
+      "borough_id": "7",
+      "borough": "Le Plateau-Mont-Royal",
+      "latitude": 45.5276258,
+      "longitude": -73.5668566,
+      "detail_url": "https://www.google.com/maps/place/Tennis+-+Parc+La+Fontaine/@45.5277434,-73.5670545,148m/data=!3m1!1e3!4m14!1m7!3m6!1s0x4cc91bc7089e5d7d:0x5a07eba6466f1ca6!2sTennis!8m2!3d45.5276426!4d-73.5667907!16s%2Fg%2F11sy72_ch6!3m5!1s0x4cc91bc6a4acc157:0x4fad230147e7d37b!8m2!3d45.5276258!4d-73.5668566!16s%2Fg%2F11dzw5tllv?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "site_key": "parc-ladauversiere-terrain-de-sport",
+      "site_id": "73",
+      "site": "Parc Ladauversière, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-luigi-pirandello-terrain-de-sport",
+      "site_id": "75",
+      "site": "Parc Luigi-Pirandello, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-marcelin-wilson-terrain-de-sport",
+      "site_id": "804",
+      "site": "Parc Marcelin-Wilson, terrain de sport",
+      "borough_id": "3",
+      "borough": "Ahuntsic - Cartierville"
+    },
+    {
+      "site_key": "parc-martin-luther-king-terrain-de-sport",
+      "site_id": "1755",
+      "site": "Parc Martin-Luther-King, terrain de sport",
+      "borough_id": "9",
+      "borough": "Côte-des-Neiges - Notre-Dame-de-Grâce"
+    },
+    {
+      "site_key": "parc-nicolas-viel-terrain-de-sport",
+      "site_id": "792",
+      "site": "Parc Nicolas-Viel, terrain de sport",
+      "borough_id": "3",
+      "borough": "Ahuntsic - Cartierville"
+    },
+    {
+      "site_key": "parc-pie-xii-terrain-de-sport",
+      "site_id": "74",
+      "site": "Parc Pie-XII, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-pere-marquette-terrain-de-sport",
+      "site_id": "1472",
+      "site": "Parc Père-Marquette, terrain de sport",
+      "borough_id": "5",
+      "borough": "Rosemont - La Petite-Patrie"
+    },
+    {
+      "site_key": "parc-warren-allmand-terrain-de-sport",
+      "site_id": "1884",
+      "site": "Parc Warren-Allmand, terrain de sport",
+      "borough_id": "9",
+      "borough": "Côte-des-Neiges - Notre-Dame-de-Grâce"
+    },
+    {
+      "site_key": "parc-wilfrid-bastien-terrain-de-sport",
+      "site_id": "86",
+      "site": "Parc Wilfrid-Bastien, terrain de sport",
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
+    },
+    {
+      "site_key": "parc-wilson-terrain-de-sport",
+      "site_id": "1081",
+      "site": "Parc Wilson, terrain de sport",
+      "borough_id": "1",
+      "borough": "Verdun"
+    },
+    {
+      "site_key": "patinoire-du-centre-sportif-dollard-saint-laurent",
+      "site_id": "655",
+      "site": "Patinoire du Centre sportif Dollard-Saint-Laurent",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "stade-de-soccer-de-montreal",
+      "site_id": "911",
+      "site": "Stade de soccer de Montréal",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "terrain-de-sport-parc-gohier",
+      "site_id": "1033",
+      "site": "Terrain de sport - Parc Gohier",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-marcel-laurin",
+      "site_id": "810",
+      "site": "Terrains de sport - Marcel-Laurin",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-marlborough",
+      "site_id": "1002",
+      "site": "Terrains de sport - Marlborough",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-alexis-nihon",
+      "site_id": "1014",
+      "site": "Terrains de sport - Parc Alexis-Nihon",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-cousineau",
+      "site_id": "1029",
+      "site": "Terrains de sport - Parc Cousineau",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-hartenstein",
+      "site_id": "1035",
+      "site": "Terrains de sport - Parc Hartenstein",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-noel-sud",
+      "site_id": "1048",
+      "site": "Terrains de sport - Parc Noël-Sud",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-painter",
+      "site_id": "1004",
+      "site": "Terrains de sport - Parc Painter",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-philippe-laheurte",
+      "site_id": "1084",
+      "site": "Terrains de sport - Parc Philippe-Laheurte",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-parc-saint-laurent",
+      "site_id": "1069",
+      "site": "Terrains de sport - Parc Saint-Laurent",
+      "borough_id": "17",
+      "borough": "Saint-Laurent"
+    },
+    {
+      "site_key": "terrains-de-sport-du-parc-jonathan-wilson",
+      "site_id": "919",
+      "site": "Terrains de sport du parc Jonathan-Wilson",
+      "borough_id": "16",
+      "borough": "L'Île-Bizard - Sainte-Geneviève"
+    },
+    {
+      "site_key": "terrains-de-tennis-garneau-4",
+      "site_id": "653",
+      "site": "Terrains de tennis Garneau (4)",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "terrains-de-tennis-joyce-3",
+      "site_id": "682",
+      "site": "Terrains de tennis Joyce (3)",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "terrains-de-tennis-saint-viateur-6",
+      "site_id": "654",
+      "site": "Terrains de tennis Saint-Viateur (6)",
+      "borough_id": "15",
+      "borough": "Outremont"
+    },
+    {
+      "site_key": "terrains-exterieurs-claude-robillard",
+      "site_id": "866",
+      "site": "Terrains extérieurs Claude-Robillard",
+      "borough_id": "3",
+      "borough": "Ahuntsic - Cartierville"
+    },
+    {
+      "site_key": "terrains-sportifs-du-parc-lasalle",
+      "site_id": "2060",
+      "site": "Terrains sportifs du parc LaSalle",
+      "borough_id": "2",
+      "borough": "Lachine"
+    },
+    {
+      "site_key": "ecole-notre-dame-de-lourdes",
+      "site_id": "678",
+      "site": "École Notre-Dame-de-Lourdes",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "ecole-secondaire-monseigneur-richard",
+      "site_id": "676",
+      "site": "École secondaire Monseigneur-Richard",
+      "borough_id": "",
+      "borough": ""
+    },
+    {
+      "site_key": "ecole-ile-des-soeurs",
+      "site_id": "674",
+      "site": "École Île-des-Soeurs",
+      "borough_id": "1",
+      "borough": "Verdun"
+    }
+  ]
+}

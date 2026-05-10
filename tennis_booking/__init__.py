@@ -1,0 +1,1 @@
+"""Tennis court availability helper."""

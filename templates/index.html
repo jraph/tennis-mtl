@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tennis Court Booker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Montreal tennis helper</p>
+          <h1>Court availability grid</h1>
+          <p class="lede">
+            Check the target date two days out at the selected hour, then jump to the exact official booking page when a slot appears.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button class="primary" id="checkNowButton" type="button">Check now</button>
+          <span id="status">Ready</span>
+          <div class="progress-log" id="progressLog" aria-live="polite">
+            <div class="progress-lines" id="progressLines">
+              <div class="progress-line">Ready.</div>
+            </div>
+            <div class="progress-scrollbar" aria-hidden="true">
+              <div class="progress-scrollbar-thumb" id="progressScrollbarThumb"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="toolbar">
+        <div class="time-field toolbar-days">
+          <span>Day</span>
+          <input id="date" type="hidden" value="{{ config.date }}">
+          <input id="check_days" type="hidden" value="1">
+          <input id="check_dates" type="hidden" value="{{ config.check_dates|join(',') }}">
+          <div class="day-buttons" id="dayButtons"></div>
+        </div>
+        <div class="time-field toolbar-times">
+          <span>Times</span>
+          <input id="check_times" type="hidden" value="{{ config.check_times|join(',') }}">
+          <div class="time-buttons" id="timeButtons">
+            {% for time in ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"] %}
+              <button type="button" class="time-button" data-time="{{ time }}">{{ time }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="panel">
+          <div class="panel-heading">
+            <h2>Filters</h2>
+          </div>
+          <div class="time-field">
+            <span>Locations</span>
+            <input id="borough_ids" type="hidden" value="{{ config.borough_ids|join(',') }}">
+            <input id="site_ids" type="hidden" value="{{ config.site_ids|join(',') }}">
+            <div class="location-groups" id="locationFilterButtons"></div>
+            <section class="facility-maps" id="facilityMaps" aria-live="polite"></section>
+          </div>
+          <div class="time-field">
+            <span>Facility types</span>
+            <input id="facility_type_ids" type="hidden" value="{{ config.facility_type_ids|join(',') }}">
+            <div class="facility-type-buttons" id="facilityTypeButtons">
+              <button type="button" class="facility-type-button" data-type-id="175" title="Facility type 175">Outdoor tennis</button>
+              <button type="button" class="facility-type-button" data-type-id="114" title="Facility type 114">Indoor tennis</button>
+              <button type="button" class="facility-type-button" data-type-id="115" title="Facility type 115">Indoor soccer</button>
+            </div>
+          </div>
+          <button id="saveButton" type="button">Save defaults</button>
+        </aside>
+
+        <section class="results">
+          <div class="results-heading">
+            <div>
+              <h2>Latest results</h2>
+              <p id="summary">No check has run yet.</p>
+            </div>
+          </div>
+          <div id="results" class="queue"></div>
+        </section>
+      </section>
+    </main>
+    <script>
+      window.locationData = {{ locations|tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
