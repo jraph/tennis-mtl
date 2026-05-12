@@ -31,6 +31,33 @@ const pinnedBoroughIds = ["7", "5", "3", "1", "15", "19"];
 const progressLines = [];
 let locationFilterButtons = [];
 
+const LOCAL_DEFAULTS_KEY = "tennis-mtl:defaults";
+
+function loadLocalDefaults() {
+  try {
+    const raw = localStorage.getItem(LOCAL_DEFAULTS_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveLocalDefaults(config) {
+  localStorage.setItem(LOCAL_DEFAULTS_KEY, JSON.stringify(config));
+}
+
+const localDefaults = loadLocalDefaults();
+if (localDefaults) {
+  const apply = (id, value) => {
+    if (value === undefined || value === null) return;
+    const el = document.querySelector(`#${id}`);
+    if (el) el.value = Array.isArray(value) ? value.join(",") : String(value);
+  };
+  apply("borough_ids", localDefaults.borough_ids);
+  apply("site_ids", localDefaults.site_ids);
+  apply("facility_type_ids", localDefaults.facility_type_ids);
+}
+
 function configFromForm() {
   const value = (id) => document.querySelector(`#${id}`).value;
   return {
@@ -513,7 +540,7 @@ function toggleLocation(button) {
   statusEl.textContent = "Unsaved changes";
 }
 
-async function toggleLocationGroup(event, group) {
+function toggleLocationGroup(event, group) {
   event.preventDefault();
   event.stopPropagation();
 
@@ -533,14 +560,8 @@ async function toggleLocationGroup(event, group) {
   renderLocationFilters();
   setSelectedLocations(Array.from(selected));
   bindLocationButtons();
-  statusEl.textContent = "Saving defaults...";
-  try {
-    await postJson("/api/config", configFromForm());
-    statusEl.textContent = "Defaults saved";
-  } catch (error) {
-    statusEl.textContent = "Save failed";
-    summaryEl.textContent = error.message;
-  }
+  saveLocalDefaults(configFromForm());
+  statusEl.textContent = "Defaults saved";
 }
 
 function resetProgressLog() {
@@ -667,26 +688,17 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-document.querySelector("#saveButton").addEventListener("click", async () => {
+document.querySelector("#saveButton").addEventListener("click", () => {
   const saveButton = document.querySelector("#saveButton");
   const originalText = saveButton.textContent;
+  saveLocalDefaults(configFromForm());
+  statusEl.textContent = "Defaults saved";
+  saveButton.textContent = "Saved";
   saveButton.disabled = true;
-  saveButton.textContent = "Saving...";
-  statusEl.textContent = "Saving...";
-  try {
-    await postJson("/api/config", configFromForm());
-    statusEl.textContent = "Defaults saved";
-    saveButton.textContent = "Saved";
-    setTimeout(() => {
-      saveButton.textContent = originalText;
-      saveButton.disabled = false;
-    }, 1400);
-  } catch (error) {
-    statusEl.textContent = "Save failed";
-    summaryEl.textContent = error.message;
+  setTimeout(() => {
     saveButton.textContent = originalText;
     saveButton.disabled = false;
-  }
+  }, 1400);
 });
 
 progressLinesEl.addEventListener("scroll", updateProgressScrollbar);
