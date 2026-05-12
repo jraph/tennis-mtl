@@ -74,15 +74,15 @@
       "site_key": "arena-jacques-lemaire",
       "site_id": "669",
       "site": "Aréna Jacques-Lemaire",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "19",
+      "borough": "LaSalle"
     },
     {
       "site_key": "arena-saint-louis",
       "site_id": "1707",
       "site": "Aréna Saint-Louis",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "7",
+      "borough": "Le Plateau-Mont-Royal"
     },
     {
       "site_key": "centre-de-tennis-cavelier",
@@ -95,15 +95,15 @@
       "site_key": "centre-leonardo-da-vinci",
       "site_id": "13",
       "site": "Centre Léonardo-da-Vinci",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
     },
     {
       "site_key": "centre-pierre-charbonneau",
       "site_id": "1628",
       "site": "Centre Pierre-Charbonneau",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "6",
+      "borough": "Mercier - Hochelaga-Maisonneuve"
     },
     {
       "site_key": "centre-sanaaq",
@@ -123,8 +123,8 @@
       "site_key": "complexe-communautaire-saint-leonard-t-sport",
       "site_id": "85",
       "site": "Complexe communautaire Saint-Léonard, t sport",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "14",
+      "borough": "Saint-Léonard"
     },
     {
       "site_key": "complexe-sportif-claude-robillard",
@@ -356,15 +356,15 @@
       "site_key": "patinoire-du-centre-sportif-dollard-saint-laurent",
       "site_id": "655",
       "site": "Patinoire du Centre sportif Dollard-Saint-Laurent",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "19",
+      "borough": "LaSalle"
     },
     {
       "site_key": "stade-de-soccer-de-montreal",
       "site_id": "911",
       "site": "Stade de soccer de Montréal",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "4",
+      "borough": "Villeray-Saint-Michel - Parc-Extension"
     },
     {
       "site_key": "terrain-de-sport-parc-gohier",
@@ -489,8 +489,8 @@
       "site_key": "ecole-secondaire-monseigneur-richard",
       "site_id": "676",
       "site": "École secondaire Monseigneur-Richard",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "1",
+      "borough": "Verdun"
     },
     {
       "site_key": "ecole-ile-des-soeurs",

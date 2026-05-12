@@ -235,9 +235,11 @@ def fetch_all_slots(request: CheckRequest, progress: ProgressCallback | None = N
 
 
 def fetch_selected_site_slots(request: CheckRequest, progress: ProgressCallback | None = None) -> dict[str, Any]:
+    selected_site_ids = {str(site_id) for site_id in (request.site_ids or [])}
     known_borough_ids, direct_site_ids = selected_site_query_plan(request.site_ids or [])
     results: list[dict[str, Any]] = []
     seen_keys: set[str] = set()
+    found_site_ids: set[str] = set()
     record_count = 0
 
     for index, borough_id in enumerate(known_borough_ids, start=1):
@@ -248,14 +250,21 @@ def fetch_selected_site_slots(request: CheckRequest, progress: ProgressCallback 
         )
         record_count += int(borough_payload["recordCount"])
         for slot in borough_payload["results"]:
+            site_id = str(((slot.get("facility") or {}).get("site") or {}).get("id") or "")
+            if site_id in selected_site_ids:
+                found_site_ids.add(site_id)
             key = slot_identity(slot)
             if key in seen_keys:
                 continue
             seen_keys.add(key)
             results.append(slot)
 
-    for index, site_id in enumerate(direct_site_ids, start=1):
-        emit_progress(progress, f"Querying selected siteId {site_id} ({index}/{len(direct_site_ids)}).")
+    fallback_site_ids = list(direct_site_ids) + [
+        site_id for site_id in selected_site_ids - found_site_ids - set(direct_site_ids)
+    ]
+
+    for index, site_id in enumerate(fallback_site_ids, start=1):
+        emit_progress(progress, f"Querying selected siteId {site_id} ({index}/{len(fallback_site_ids)}).")
         site_payload = fetch_all_slots_for_request(
             request_with_borough(request, ""),
             progress=progress,
