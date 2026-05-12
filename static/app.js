@@ -212,7 +212,9 @@ function renderSlots(slots) {
 
 function formatSlotHour(slot) {
   const start = new Date(slot.start);
-  return start.toLocaleTimeString("en-CA", { hour: "numeric" }).toLowerCase().replace(/\s/g, " ");
+  const day = start.toLocaleDateString("en-CA", { weekday: "short", month: "short", day: "numeric" });
+  const time = start.toLocaleTimeString("en-CA", { hour: "numeric" }).toLowerCase().replace(/\s/g, " ");
+  return `${day} ${time}`;
 }
 
 function groupSlotsByLocation(slots) {
