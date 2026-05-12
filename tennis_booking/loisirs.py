@@ -6,7 +6,6 @@ import time
 import webbrowser
 from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 from typing import Any, Callable
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote_plus, urlencode
@@ -21,8 +20,6 @@ ProgressCallback = Callable[[str], None]
 BASE_URL = "https://loisirs.montreal.ca/IC3/#/U6510/search/"
 DETAIL_BASE_URL = "https://loisirs.montreal.ca/IC3/#/U6510/view/"
 API_URL = "https://loisirs.montreal.ca/IC3/api/U6510/public/search/"
-GEOCODE_URL = "https://nominatim.openstreetmap.org/search"
-GEOCODE_CACHE_PATH = Path("data") / "site_coordinates.json"
 TIME_ZONE_OFFSET = "-04:00"
 try:
     MONTREAL_TZ = ZoneInfo("America/Toronto")
@@ -527,7 +524,7 @@ def format_slot(slot: dict[str, Any], request: CheckRequest) -> dict[str, Any]:
     search_url = build_slot_search_url(request, start)
     detail_url = build_slot_detail_url(slot, start, end) or search_url
     facility_name = facility.get("name", "Unknown court")
-    coordinates = extract_coordinates(slot) or geocode_slot(facility_name, site.get("name"))
+    coordinates = extract_coordinates(slot)
     summary = (
         f"{start.strftime('%Y-%m-%d %H:%M')}-{end.strftime('%Y-%m-%d %H:%M')} | "
         f"{facility_name} | {site.get('name', 'Unknown site')} | "
@@ -642,58 +639,6 @@ def build_map_url(
         return f"https://www.google.com/maps?q={lat},{lon}&t=k"
     query = quote_plus(f"{facility_name} {site_name or ''} Montreal")
     return f"https://www.openstreetmap.org/search?query={query}"
-
-
-def geocode_slot(facility_name: str, site_name: str | None) -> tuple[float, float] | None:
-    name = site_name or facility_name
-    if not name:
-        return None
-
-    cache = load_geocode_cache()
-    cache_key = normalize_cache_key(name)
-    if cache_key in cache:
-        cached = cache[cache_key]
-        return normalize_coordinates(cached.get("latitude"), cached.get("longitude"))
-
-    query = f"{name}, Montreal, Quebec, Canada"
-    coordinates = geocode_query(query)
-    if coordinates:
-        cache[cache_key] = {"latitude": coordinates[0], "longitude": coordinates[1]}
-        save_geocode_cache(cache)
-    return coordinates
-
-
-def geocode_query(query: str) -> tuple[float, float] | None:
-    params = urlencode({"format": "jsonv2", "limit": 1, "q": query})
-    request = UrlRequest(
-        f"{GEOCODE_URL}?{params}",
-        headers={"User-Agent": "tennis-booking-checker/1.0"},
-        method="GET",
-    )
-    try:
-        with urlopen(request, timeout=8) as response:
-            results = json.loads(response.read().decode("utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    if not results:
-        return None
-    return normalize_coordinates(results[0].get("lat"), results[0].get("lon"))
-
-
-def load_geocode_cache() -> dict[str, dict[str, float]]:
-    try:
-        return json.loads(GEOCODE_CACHE_PATH.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return {}
-
-
-def save_geocode_cache(cache: dict[str, dict[str, float]]) -> None:
-    GEOCODE_CACHE_PATH.parent.mkdir(exist_ok=True)
-    GEOCODE_CACHE_PATH.write_text(json.dumps(cache, indent=2), encoding="utf-8")
-
-
-def normalize_cache_key(value: str) -> str:
-    return re.sub(r"\s+", " ", value.strip().lower())
 
 
 def format_api_time(value: str | None) -> str:
