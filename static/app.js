@@ -43,7 +43,12 @@ function loadLocalDefaults() {
 }
 
 function saveLocalDefaults(config) {
-  localStorage.setItem(LOCAL_DEFAULTS_KEY, JSON.stringify(config));
+  const persisted = {
+    borough_ids: config.borough_ids,
+    site_ids: config.site_ids,
+    facility_type_ids: config.facility_type_ids,
+  };
+  localStorage.setItem(LOCAL_DEFAULTS_KEY, JSON.stringify(persisted));
 }
 
 const localDefaults = loadLocalDefaults();
@@ -280,7 +285,7 @@ function dateFromInputValue(dateValue) {
 
 function buildDayButtons() {
   const today = new Date();
-  const selected = new Set(selectedDates().length ? selectedDates() : [dateToInputValue(addDays(today, 2))]);
+  const selected = new Set([dateToInputValue(addDays(today, 2))]);
   dayButtonsEl.replaceChildren();
   for (let offset = 0; offset < 3; offset += 1) {
     const dateValue = dateToInputValue(addDays(today, offset));
