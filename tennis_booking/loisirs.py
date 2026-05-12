@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import re
 import time
-import webbrowser
 from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Callable
@@ -39,7 +38,6 @@ class CheckRequest:
     site_ids: list[str] | None = None
     site_names: list[str] | None = None
     sort_column: str = "facility.name"
-    open_when_found: bool = False
 
     @classmethod
     def from_config(cls, config: AppConfig, date_override: str | None = None) -> "CheckRequest":
@@ -54,7 +52,6 @@ class CheckRequest:
             site_ids=config.site_ids,
             site_names=config.site_names,
             sort_column=config.sort_column,
-            open_when_found=config.open_when_found,
         )
 
 
@@ -164,7 +161,6 @@ def scan_time_grid(config: AppConfig, progress: ProgressCallback | None = None) 
         site_ids=config.site_ids,
         site_names=config.site_names,
         sort_column=config.sort_column,
-        open_when_found=config.open_when_found,
     )
     return [check_availability(request, progress=progress)]
 
@@ -210,9 +206,6 @@ def check_availability(request: CheckRequest, progress: ProgressCallback | None 
     available_count = count_available(relevant_slots)
     record_count = int(payload["recordCount"])
     status = "available" if available_count else "unavailable"
-
-    if status == "available" and request.open_when_found:
-        webbrowser.open(url)
 
     emit_progress(progress, f"Finished: {available_count} reservable slot(s) from {record_count} API record(s).")
 
@@ -312,7 +305,6 @@ def request_with_borough(request: CheckRequest, borough_id: str) -> CheckRequest
         site_ids=request.site_ids,
         site_names=request.site_names,
         sort_column=request.sort_column,
-        open_when_found=request.open_when_found,
     )
 
 
@@ -577,7 +569,6 @@ def build_slot_search_url(request: CheckRequest, start: datetime) -> str:
             site_ids=request.site_ids,
             site_names=request.site_names,
             sort_column=request.sort_column,
-            open_when_found=request.open_when_found,
         )
     )
 

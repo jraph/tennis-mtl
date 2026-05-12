@@ -9,7 +9,6 @@ Calls the public Loisirs Montréal search API (no login required). Press **Check
 - **Availability grid** — pick one or more dates and times, see all matching slots across boroughs in one view
 - **Location filters** — toggle by named park (La Fontaine, Jeanne-Mance, Beaubien, Claude-Robillard, etc.)
 - **Direct booking links** — each result links to the exact Loisirs Montréal booking page for that court and time slot
-- **Auto-open** — optionally open the booking page in the browser the moment a reservable slot appears
 - **CLI mode** — run a single check from the terminal without starting the web server
 
 ## Setup
@@ -66,7 +65,6 @@ Server-side seed defaults live in `data/config.json`. The web UI lets each brows
 | `borough_ids` | `["7","5"]` | Loisirs borough IDs to search |
 | `facility_type_ids` | `["175","115"]` | Facility type IDs (175 = outdoor hard, 115 = outdoor clay) |
 | `site_names` | `[]` | Filter to specific park names (partial, case-insensitive) |
-| `open_when_found` | `false` | Auto-open the booking page when a reservable slot is found |
 
 ## Raspberry Pi deployment
 

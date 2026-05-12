@@ -10,6 +10,5 @@
   "check_duration_minutes": 1440,
   "borough_ids": ["7", "15", "5"],
   "facility_type_ids": ["175", "114"],
-  "sort_column": "facility.name",
-  "open_when_found": false
+  "sort_column": "facility.name"
 }

@@ -44,7 +44,6 @@ class AppConfig:
     site_ids: list[str] = field(default_factory=list)
     site_names: list[str] = field(default_factory=list)
     sort_column: str = "facility.name"
-    open_when_found: bool = False
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "AppConfig":

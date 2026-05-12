@@ -70,8 +70,7 @@ function configFromForm() {
     facility_type_ids: selectedFacilityTypes(),
     site_ids: selectedLocations().map((location) => location.site_id).filter(Boolean),
     site_names: selectedLocations().map((location) => location.site).filter(Boolean),
-    sort_column: "facility.name",
-    open_when_found: false
+    sort_column: "facility.name"
   };
 }
 
