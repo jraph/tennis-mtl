@@ -2,7 +2,7 @@
 
 Flask web app that checks [Loisirs Montréal](https://loisirs.montreal.ca) tennis court availability and links directly to the official booking page when a slot opens up.
 
-Calls the public Loisirs Montréal search API (no login required). Background scheduled checks run inside the web process via APScheduler so you can leave the app running and come back to results.
+Calls the public Loisirs Montréal search API (no login required). Press **Check now** to run a query; results are returned over a streaming response so you see progress as it goes.
 
 ## Features
 
@@ -35,17 +35,13 @@ Copy-Item data\config.example.json data\config.json
 python app.py
 ```
 
-To use a different port:
-
-```powershell
-python app.py --port 5001
-```
-
 Then open:
 
 ```
-http://127.0.0.1:5000
+https://127.0.0.1:5000
 ```
+
+(The dev server uses an adhoc self-signed cert — your browser will show a one-time warning. Pass `--no-https` to disable, or `--port 5001` to listen on a different port.)
 
 ## Run one check (CLI)
 
@@ -58,7 +54,7 @@ Prints available slots and direct booking URLs to stdout.
 
 ## Configuration
 
-Settings are stored in `data/config.json` and editable via the web UI (Save defaults button) or directly.
+Server-side seed defaults live in `data/config.json`. The web UI lets each browser override them via the **Save defaults** button — those overrides are kept in `localStorage` on the device, so they don't affect other clients.
 
 | Field | Default | Description |
 |---|---|---|
@@ -74,7 +70,7 @@ Settings are stored in `data/config.json` and editable via the web UI (Save defa
 
 ## Raspberry Pi deployment
 
-The app runs under Gunicorn managed by systemd. One worker is enough — the scheduler is in-process and concurrent check requests are fast.
+The app runs under Gunicorn managed by systemd. One worker is enough — checks are on-demand and fast.
 
 **Note:** this exposes the app with no authentication. Make sure port 5000 is not open to the public internet.
 
@@ -87,13 +83,14 @@ python3 -m venv .venv
 cp data/config.example.json data/config.json
 ```
 
-Install and enable the systemd service:
+Install and enable the systemd service (idempotent — re-run after pulling unit changes):
 
 ```bash
-sed "s|TENNIS_MTL_DIR|$(pwd)|g" scripts/tennis-mtl.service | sed "/\[Service\]/a User=$(whoami)" | sudo tee /etc/systemd/system/tennis-mtl.service > /dev/null
-sudo systemctl daemon-reload
-sudo systemctl enable --now tennis-mtl
+bash scripts/install-service.sh
+sudo systemctl enable tennis-mtl
 ```
+
+The script substitutes the install path, writes `/etc/systemd/system/tennis-mtl.service`, reloads systemd, restarts the service, and prints status. On first start it generates a self-signed `cert.pem` / `key.pem` in the repo root via `scripts/ensure_cert.py`.
 
 Check it's running:
 
@@ -102,7 +99,7 @@ sudo systemctl status tennis-mtl
 journalctl -u tennis-mtl -f
 ```
 
-The app listens on port 5000 on all interfaces.
+The app listens on `https://0.0.0.0:5000` (self-signed cert; browsers will show a one-time warning).
 
 ## Windows scheduled task
 
