@@ -447,15 +447,15 @@
       "site_key": "terrains-de-tennis-garneau-4",
       "site_id": "653",
       "site": "Terrains de tennis Garneau (4)",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "15",
+      "borough": "Outremont"
     },
     {
       "site_key": "terrains-de-tennis-joyce-3",
       "site_id": "682",
       "site": "Terrains de tennis Joyce (3)",
-      "borough_id": "",
-      "borough": ""
+      "borough_id": "15",
+      "borough": "Outremont"
     },
     {
       "site_key": "terrains-de-tennis-saint-viateur-6",
