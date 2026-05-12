@@ -13,7 +13,6 @@ const progressLinesEl = document.querySelector("#progressLines");
 const progressScrollbarThumbEl = document.querySelector("#progressScrollbarThumb");
 const summaryEl = document.querySelector("#summary");
 const resultsEl = document.querySelector("#results");
-const facilityMapsEl = document.querySelector("#facilityMaps");
 const checkNowButton = document.querySelector("#checkNowButton");
 const dateEl = document.querySelector("#date");
 const dayButtonsEl = document.querySelector("#dayButtons");
@@ -105,7 +104,6 @@ function renderResults(results) {
   resultsEl.replaceChildren();
   const availableCount = list.reduce((total, result) => total + (result.available_count || 0), 0);
   summaryEl.textContent = `${availableCount} reservable slot${availableCount === 1 ? "" : "s"} from latest grid check.`;
-  renderFacilityMaps(list);
 
   for (const result of list) {
     const item = document.createElement("article");
@@ -120,42 +118,6 @@ function renderResults(results) {
     `;
     resultsEl.appendChild(item);
   }
-}
-
-function renderFacilityMaps(results) {
-  const sites = new Map();
-  for (const location of defaultLocations) {
-    if (selectedLocationKeys().includes(location.site_key)) {
-      sites.set(mapSiteKey(location), location);
-    }
-  }
-  for (const result of results) {
-    const slots = Array.isArray(result.slots) ? result.slots : [];
-    for (const slot of slots) {
-      const siteKey = mapSiteKey(slot);
-      if (!siteKey || sites.has(siteKey) || !selectedBoroughs().includes(String(slot.borough_id || ""))) continue;
-      sites.set(siteKey, slot);
-    }
-  }
-
-  if (!sites.size) {
-    facilityMapsEl.replaceChildren();
-    return;
-  }
-  const selectedSites = Array.from(sites.values());
-
-  facilityMapsEl.innerHTML = `
-    <div class="map-list">
-      ${selectedSites.map((slot) => `
-        <article class="facility-map">
-          <h3>${escapeHtml(slot.site)}</h3>
-          <p>${escapeHtml(slot.borough)}</p>
-          ${renderSiteMap(slot)}
-          <a class="satellite-link" href="${satelliteDetailUrl(slot)}" target="_blank" rel="noreferrer">Satellite detail</a>
-        </article>
-      `).join("")}
-    </div>
-  `;
 }
 
 function renderSiteMap(slot) {
@@ -230,6 +192,7 @@ function groupSlotsByLocation(slots) {
       groups.set(key, {
         site: slot.site,
         borough: slot.borough,
+        firstSlot: slot,
         slots: [],
       });
     }
@@ -399,13 +362,39 @@ function renderLocationFilters() {
     const buttons = document.createElement("div");
     buttons.className = "location-filter-buttons";
     for (const location of group.locations) {
+      const cell = document.createElement("div");
+      cell.className = "location-cell";
+
+      const row = document.createElement("div");
+      row.className = "location-cell-row";
+
       const button = document.createElement("button");
       button.type = "button";
       button.className = "location-filter-button";
       button.dataset.siteKey = location.site_key;
       button.title = location.site;
       button.textContent = locationLabel(location.site);
-      buttons.appendChild(button);
+      row.appendChild(button);
+
+      const mapToggle = document.createElement("button");
+      mapToggle.type = "button";
+      mapToggle.className = "map-icon-toggle";
+      mapToggle.setAttribute("aria-expanded", "false");
+      mapToggle.setAttribute("aria-label", `Show map for ${location.site}`);
+      mapToggle.dataset.embed = googleMapEmbedUrl(location);
+      mapToggle.dataset.satellite = satelliteDetailUrl(location);
+      mapToggle.dataset.site = location.site;
+      mapToggle.textContent = "🌎";
+      row.appendChild(mapToggle);
+
+      cell.appendChild(row);
+
+      const mapEl = document.createElement("div");
+      mapEl.className = "site-map";
+      mapEl.hidden = true;
+      cell.appendChild(mapEl);
+
+      buttons.appendChild(cell);
     }
 
     section.appendChild(buttons);
@@ -521,7 +510,6 @@ function toggleLocation(button) {
     siteKeys.add(value);
   }
   setSelectedLocations(Array.from(siteKeys));
-  renderFacilityMaps([]);
   statusEl.textContent = "Unsaved changes";
 }
 
@@ -545,7 +533,6 @@ async function toggleLocationGroup(event, group) {
   renderLocationFilters();
   setSelectedLocations(Array.from(selected));
   bindLocationButtons();
-  renderFacilityMaps([]);
   statusEl.textContent = "Saving defaults...";
   try {
     await postJson("/api/config", configFromForm());
@@ -717,6 +704,7 @@ checkNowButton.addEventListener("click", async () => {
     });
     renderResults(result);
     statusEl.textContent = "Check complete";
+    setFiltersCollapsed(true);
   } catch (error) {
     statusEl.textContent = "Check failed";
     summaryEl.textContent = error.message;
@@ -724,6 +712,46 @@ checkNowButton.addEventListener("click", async () => {
     checkNowButton.disabled = false;
     checkNowButton.textContent = originalText;
   }
+});
+
+const filtersPanel = document.querySelector("#filtersPanel");
+const filtersToggle = document.querySelector("#filtersToggle");
+
+function setFiltersCollapsed(collapsed) {
+  filtersPanel.classList.toggle("collapsed", collapsed);
+  filtersToggle.setAttribute("aria-expanded", String(!collapsed));
+}
+
+filtersToggle.addEventListener("click", () => {
+  setFiltersCollapsed(!filtersPanel.classList.contains("collapsed"));
+});
+
+document.querySelector("#locationFilterButtons").addEventListener("click", (event) => {
+  const button = event.target.closest(".map-icon-toggle");
+  if (!button) return;
+  const cell = button.closest(".location-cell");
+  const mapEl = cell && cell.querySelector(".site-map");
+  if (!mapEl) return;
+  const expanded = button.getAttribute("aria-expanded") === "true";
+  if (expanded) {
+    mapEl.hidden = true;
+    mapEl.replaceChildren();
+    button.setAttribute("aria-expanded", "false");
+    return;
+  }
+  mapEl.innerHTML = `
+    <iframe
+      class="facility-map-frame"
+      title="Google map for ${button.dataset.site}"
+      src="${button.dataset.embed}"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+    <a class="satellite-link" href="${button.dataset.satellite}" target="_blank" rel="noreferrer">Satellite detail</a>
+  `;
+  mapEl.hidden = false;
+  button.setAttribute("aria-expanded", "true");
 });
 
 for (const id of fields) {
@@ -749,7 +777,7 @@ setSelectedLocations(defaultLocations
   .map((location) => location.site_key));
 setSelectedFacilityTypes(selectedFacilityTypes());
 buildDayButtons();
-renderFacilityMaps([]);
+renderFacilityMaps();
 updateProgressScrollbar();
 
 function bindLocationButtons() {

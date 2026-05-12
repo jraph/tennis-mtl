@@ -366,13 +366,45 @@ input {
   gap: 14px;
 }
 
+.panel-body {
+  display: grid;
+  gap: 14px;
+}
+
+.panel.collapsed .panel-body {
+  display: none;
+}
+
+.panel-toggle {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  min-height: 0;
+}
+
+.panel-chevron {
+  color: var(--muted);
+  transition: transform 0.15s ease;
+}
+
+.panel.collapsed .panel-chevron {
+  transform: rotate(-90deg);
+}
+
 .panel-heading,
 .results-heading {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: center;
   gap: 12px;
   margin-bottom: 16px;
+}
+
+.panel.collapsed .panel-heading {
+  margin-bottom: 0;
 }
 
 .queue {
@@ -425,6 +457,62 @@ input {
   color: var(--muted);
   font-size: 0.86rem;
   margin: -6px 0 0;
+}
+
+.location-cell {
+  display: grid;
+  gap: 6px;
+}
+
+.location-cell:has(.site-map:not([hidden])) {
+  grid-column: 1 / -1;
+}
+
+.location-cell-row {
+  display: flex;
+  align-items: stretch;
+}
+
+.location-cell-row .location-filter-button {
+  flex: 1;
+  min-width: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.map-icon-toggle {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-left: 1px solid var(--line);
+  font-size: 0.78rem;
+  line-height: 1;
+  min-height: 32px;
+  padding: 0 6px;
+  flex-shrink: 0;
+  background: var(--panel);
+  color: var(--muted);
+}
+
+.location-filter-button.selected + .map-icon-toggle {
+  border-left-color: var(--accent);
+}
+
+.map-icon-toggle[aria-expanded="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.site-map {
+  display: grid;
+  gap: 8px;
+}
+
+.site-map[hidden] {
+  display: none;
 }
 
 .slot-group {
@@ -482,17 +570,6 @@ input {
   margin: 6px 0 0;
 }
 
-.facility-maps {
-  display: grid;
-  gap: 12px;
-  margin-top: 2px;
-}
-
-.map-list {
-  display: grid;
-  gap: 12px;
-}
-
 .location-button {
   border-radius: 6px;
   font-size: 0.84rem;
@@ -509,24 +586,6 @@ input {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-}
-
-.facility-map {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  display: grid;
-  gap: 8px;
-  padding: 10px;
-}
-
-.facility-map h3 {
-  margin: 0;
-}
-
-.facility-map p {
-  color: var(--muted);
-  font-size: 0.86rem;
-  margin: 0;
 }
 
 .facility-map-frame {

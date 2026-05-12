@@ -50,27 +50,29 @@
       </section>
 
       <section class="layout">
-        <aside class="panel">
-          <div class="panel-heading">
+        <aside class="panel" id="filtersPanel">
+          <button class="panel-heading panel-toggle" id="filtersToggle" type="button" aria-expanded="true" aria-controls="filtersBody">
             <h2>Filters</h2>
-          </div>
-          <div class="time-field">
-            <span>Locations</span>
-            <input id="borough_ids" type="hidden" value="{{ config.borough_ids|join(',') }}">
-            <input id="site_ids" type="hidden" value="{{ config.site_ids|join(',') }}">
-            <div class="location-groups" id="locationFilterButtons"></div>
-            <section class="facility-maps" id="facilityMaps" aria-live="polite"></section>
-          </div>
-          <div class="time-field">
-            <span>Facility types</span>
-            <input id="facility_type_ids" type="hidden" value="{{ config.facility_type_ids|join(',') }}">
-            <div class="facility-type-buttons" id="facilityTypeButtons">
-              <button type="button" class="facility-type-button" data-type-id="175" title="Facility type 175">Outdoor tennis</button>
-              <button type="button" class="facility-type-button" data-type-id="114" title="Facility type 114">Indoor tennis</button>
-              <button type="button" class="facility-type-button" data-type-id="115" title="Facility type 115">Indoor soccer</button>
+            <span class="panel-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="panel-body" id="filtersBody">
+            <div class="time-field">
+              <span>Locations</span>
+              <input id="borough_ids" type="hidden" value="{{ config.borough_ids|join(',') }}">
+              <input id="site_ids" type="hidden" value="{{ config.site_ids|join(',') }}">
+              <div class="location-groups" id="locationFilterButtons"></div>
             </div>
+            <div class="time-field">
+              <span>Facility types</span>
+              <input id="facility_type_ids" type="hidden" value="{{ config.facility_type_ids|join(',') }}">
+              <div class="facility-type-buttons" id="facilityTypeButtons">
+                <button type="button" class="facility-type-button" data-type-id="175" title="Facility type 175">Outdoor tennis</button>
+                <button type="button" class="facility-type-button" data-type-id="114" title="Facility type 114">Indoor tennis</button>
+                <button type="button" class="facility-type-button" data-type-id="115" title="Facility type 115">Indoor soccer</button>
+              </div>
+            </div>
+            <button id="saveButton" type="button">Save defaults</button>
           </div>
-          <button id="saveButton" type="button">Save defaults</button>
         </aside>
 
         <section class="results">
