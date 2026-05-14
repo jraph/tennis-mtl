@@ -11,7 +11,7 @@ DATA_DIR = Path("data")
 CONFIG_PATH = DATA_DIR / "config.json"
 LOCATIONS_PATH = DATA_DIR / "locations.json"
 DEFAULT_BOROUGH_IDS = ["7", "5"]
-DEFAULT_FACILITY_TYPE_IDS = ["175", "115"]
+DEFAULT_FACILITY_TYPE_IDS = ["175", "114"]
 DEFAULT_TIME_CHOICES = [
     "08:00",
     "09:00",

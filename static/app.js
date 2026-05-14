@@ -619,7 +619,8 @@ function selectedFacilityTypes() {
 }
 
 function setSelectedFacilityTypes(typeIds) {
-  const normalized = new Set(typeIds.map(String));
+  const known = new Set(facilityTypeButtons.map((button) => button.dataset.typeId));
+  const normalized = new Set(typeIds.map(String).filter((id) => known.has(id)));
   for (const button of facilityTypeButtons) {
     button.classList.toggle("selected", normalized.has(button.dataset.typeId));
   }
